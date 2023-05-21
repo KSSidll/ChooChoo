@@ -1,36 +1,35 @@
-package com.kssidll.choochoo.data.repository
+package com.kssidll.choochoo.data.fake
 
-import com.kssidll.choochoo.data.dao.TicketDao
 import com.kssidll.choochoo.data.data.Ticket
+import com.kssidll.choochoo.data.repository.ITicketRepository
 import kotlinx.coroutines.flow.Flow
 
-class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
-
+class FakeTicketRepository : ITicketRepository {
     override fun getAll(): Flow<List<Ticket>> {
-        return ticketDao.getAll()
+        TODO("Not yet implemented")
     }
 
     override fun get(id: Int): Flow<Ticket> {
-        return ticketDao.get(id)
+        TODO("Not yet implemented")
     }
 
     override fun getByUserId(userId: Int): Flow<List<Ticket>> {
-        return ticketDao.getByUserId(userId)
+        TODO("Not yet implemented")
     }
 
     override fun getByUserIdAll(userId: Int): Flow<List<Ticket>> {
-        return ticketDao.getByUserIdAll(userId)
+        TODO("Not yet implemented")
     }
 
     override suspend fun insert(ticket: Ticket) {
-        ticketDao.insert(ticket)
+        TODO("Not yet implemented")
     }
 
     override suspend fun update(ticket: Ticket) {
-        ticketDao.update(ticket)
+        TODO("Not yet implemented")
     }
 
     override suspend fun delete(ticket: Ticket) {
-        ticketDao.delete(ticket)
+        TODO("Not yet implemented")
     }
 }

@@ -1,28 +1,27 @@
-package com.kssidll.choochoo.data.repository
+package com.kssidll.choochoo.data.fake
 
-import com.kssidll.choochoo.data.dao.UserDao
 import com.kssidll.choochoo.data.data.User
+import com.kssidll.choochoo.data.repository.IUserRepository
 import kotlinx.coroutines.flow.Flow
 
-class UserRepository(private val userDao: UserDao) : IUserRepository{
-
+class FakeUserRepository : IUserRepository {
     override fun getAll(): Flow<List<User>> {
-        return userDao.getAll()
+        TODO("Not yet implemented")
     }
 
     override fun get(id: Int): Flow<User> {
-        return userDao.get(id)
+        TODO("Not yet implemented")
     }
 
     override suspend fun insert(user: User) {
-        userDao.insert(user)
+        TODO("Not yet implemented")
     }
 
     override suspend fun update(user: User) {
-        userDao.update(user)
+        TODO("Not yet implemented")
     }
 
     override suspend fun delete(user: User) {
-        userDao.delete(user)
+        TODO("Not yet implemented")
     }
 }

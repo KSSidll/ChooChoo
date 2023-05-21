@@ -6,6 +6,9 @@ import com.kssidll.choochoo.data.dao.StationDao
 import com.kssidll.choochoo.data.dao.TicketDao
 import com.kssidll.choochoo.data.dao.UserDao
 import com.kssidll.choochoo.data.database.AppDatabase
+import com.kssidll.choochoo.data.repository.IStationRepository
+import com.kssidll.choochoo.data.repository.ITicketRepository
+import com.kssidll.choochoo.data.repository.IUserRepository
 import com.kssidll.choochoo.data.repository.StationRepository
 import com.kssidll.choochoo.data.repository.TicketRepository
 import com.kssidll.choochoo.data.repository.UserRepository
@@ -36,7 +39,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideUserRepository(userDao: UserDao): UserRepository {
+    fun provideUserRepository(userDao: UserDao): IUserRepository {
         return UserRepository(userDao)
     }
 
@@ -46,7 +49,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideTicketRepository(ticketDao: TicketDao): TicketRepository {
+    fun provideTicketRepository(ticketDao: TicketDao): ITicketRepository {
         return TicketRepository(ticketDao)
     }
 
@@ -56,7 +59,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideStationRepository(stationDao: StationDao): StationRepository {
+    fun provideStationRepository(stationDao: StationDao): IStationRepository {
         return StationRepository(stationDao)
     }
 

@@ -3,18 +3,18 @@ package com.kssidll.choochoo.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kssidll.choochoo.data.data.User
-import com.kssidll.choochoo.data.repository.StationRepository
-import com.kssidll.choochoo.data.repository.TicketRepository
-import com.kssidll.choochoo.data.repository.UserRepository
+import com.kssidll.choochoo.data.repository.IStationRepository
+import com.kssidll.choochoo.data.repository.ITicketRepository
+import com.kssidll.choochoo.data.repository.IUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(userRepository: UserRepository, ticketRepository: TicketRepository, stationRepository: StationRepository) : ViewModel() {
-    private val userRepository: UserRepository
-    private val ticketRepository: TicketRepository
-    private val stationRepository: StationRepository
+class MainActivityViewModel @Inject constructor(userRepository: IUserRepository, ticketRepository: ITicketRepository, stationRepository: IStationRepository) : ViewModel() {
+    private val userRepository: IUserRepository
+    private val ticketRepository: ITicketRepository
+    private val stationRepository: IStationRepository
 
     init {
         this.userRepository = userRepository
