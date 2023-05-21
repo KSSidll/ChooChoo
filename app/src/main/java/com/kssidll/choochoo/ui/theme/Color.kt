@@ -1,4 +1,4 @@
-package com.example.choochoo.ui.theme
+package com.kssidll.choochoo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

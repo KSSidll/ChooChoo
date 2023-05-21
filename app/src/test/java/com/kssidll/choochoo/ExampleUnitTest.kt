@@ -1,4 +1,4 @@
-package com.example.choochoo
+package com.kssidll.choochoo
 
 import org.junit.Test
 

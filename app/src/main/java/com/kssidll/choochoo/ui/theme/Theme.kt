@@ -1,4 +1,4 @@
-package com.example.choochoo.ui.theme
+package com.kssidll.choochoo.ui.theme
 
 import android.app.Activity
 import android.os.Build
