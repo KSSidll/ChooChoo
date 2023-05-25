@@ -1,4 +1,4 @@
-package com.kssidll.choochoo.ui.screen
+package com.kssidll.choochoo.ui.searchconnection
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -25,16 +25,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.kssidll.choochoo.data.fake.FakeStationRepository
-import com.kssidll.choochoo.data.fake.FakeTicketRepository
-import com.kssidll.choochoo.data.fake.FakeUserRepository
+import com.kssidll.choochoo.data.data.Station
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
-import com.kssidll.choochoo.ui.viewmodel.MainActivityViewModel
 
 @Composable
-fun MainScreen(navController: NavController, viewModel: MainActivityViewModel) {
+fun SearchConnectionScreen(
+        onSearchConnection: () -> Unit,
+        stations: List<Station>
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         // header
         Box(
@@ -99,7 +97,7 @@ fun MainScreen(navController: NavController, viewModel: MainActivityViewModel) {
                 ) {
 
                     Button(
-                        onClick = {/*TODO search for connections that match data in the form*/ },
+                        onClick = onSearchConnection,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(70.dp)
@@ -117,30 +115,19 @@ fun MainScreen(navController: NavController, viewModel: MainActivityViewModel) {
     }
 }
 
-@Preview(group = "MainScreen", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@Preview(group = "SearchConnectionScreen", name = "Search Connection Light", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@Preview(group = "SearchConnectionScreen", name = "Search Connection Dark", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun MainScreenPreviewLight() {
-    val viewModel = MainActivityViewModel(FakeUserRepository(), FakeTicketRepository(), FakeStationRepository())
+fun SearchConnectionScreenPreview() {
     ChooChooTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            MainScreen(rememberNavController(), viewModel)
-        }
-    }
-}
-
-@Preview(group = "MainScreen", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun MainScreenPreviewDark() {
-    val viewModel = MainActivityViewModel(FakeUserRepository(), FakeTicketRepository(), FakeStationRepository())
-    ChooChooTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            MainScreen(rememberNavController(), viewModel)
+            SearchConnectionScreen(
+                onSearchConnection = {},
+                stations = listOf()
+            )
         }
     }
 }
