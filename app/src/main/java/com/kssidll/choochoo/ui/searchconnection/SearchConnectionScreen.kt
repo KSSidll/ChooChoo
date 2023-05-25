@@ -41,107 +41,15 @@ fun SearchConnectionScreen(
         stations: List<String>,
         user: User
 ) {
-    val searchConnectionState by rememberSaveable(stateSaver = SearchConnectionStateSaver) {
-        mutableStateOf(SearchConnectionState())
-    }
-
     Column(modifier = Modifier.fillMaxSize()) {
 
         SearchConnectionScreenHeader(height = 50.dp)
+        SearchConnectionScreenContent(
+            onSearchConnection = onSearchConnection,
+            stations = stations,
+            user = user
+        )
 
-        // screen content
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp, 0.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight(0.3F)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 3.dp),
-                    contentAlignment = Center
-                ) {
-                    OutlinedTextFieldWithExposedDropdown(
-                        placeholder = "Origin",
-                        value = searchConnectionState.origin,
-                        onValueChange = {searchConnectionState.origin = it},
-                        possibleValues = stations,
-                        modifier = Modifier.background(MaterialTheme.colorScheme.primary)
-                    )
-                }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 3.dp),
-                    contentAlignment = Center
-                ) {
-                    OutlinedTextFieldWithExposedDropdown(
-                        placeholder = "Destination",
-                        value = searchConnectionState.destination,
-                        onValueChange = {searchConnectionState.destination = it},
-                        possibleValues = stations,
-                        modifier = Modifier.background(MaterialTheme.colorScheme.primary)
-                    )
-                }
-
-                // TODO time form
-
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight(0.2F)
-                    .fillMaxWidth()
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Center
-                ) {
-                    Text(text = user.name)
-                }
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Center
-                ) {
-                    Text(text = user.surname)
-                }
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-            ) {
-
-                // center content vertically but offset it up by 15% of parent height
-                Box(
-                    modifier = Modifier.fillMaxHeight(0.7F),
-                    contentAlignment = Center
-                ) {
-
-                    Button(
-                        onClick = { onSearchConnection(searchConnectionState) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(70.dp)
-                    ) {
-                        Icon(
-                            Icons.Rounded.Search,
-                            modifier = Modifier.size(40.dp),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -177,6 +85,110 @@ fun SearchConnectionScreenHeader(height: Dp) {
             Text(
                 text = "ChooChoo",
                 color = MaterialTheme.colorScheme.onPrimary)
+        }
+    }
+}
+
+@Composable
+fun SearchConnectionScreenContent(
+        onSearchConnection: (SearchConnectionState) -> Unit,
+        stations: List<String>,
+        user: User
+) {
+    val searchConnectionState by rememberSaveable(stateSaver = SearchConnectionStateSaver) {
+        mutableStateOf(SearchConnectionState())
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp, 0.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight(0.3F)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 3.dp),
+                contentAlignment = Center
+            ) {
+                OutlinedTextFieldWithExposedDropdown(
+                    placeholder = "Origin",
+                    value = searchConnectionState.origin,
+                    onValueChange = {searchConnectionState.origin = it},
+                    possibleValues = stations,
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                )
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 3.dp),
+                contentAlignment = Center
+            ) {
+                OutlinedTextFieldWithExposedDropdown(
+                    placeholder = "Destination",
+                    value = searchConnectionState.destination,
+                    onValueChange = {searchConnectionState.destination = it},
+                    possibleValues = stations,
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                )
+            }
+
+            // TODO time form
+
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxHeight(0.2F)
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Center
+            ) {
+                Text(text = user.name)
+            }
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Center
+            ) {
+                Text(text = user.surname)
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+        ) {
+
+            // center content vertically but offset it up by 15% of parent height
+            Box(
+                modifier = Modifier.fillMaxHeight(0.7F),
+                contentAlignment = Center
+            ) {
+
+                Button(
+                    onClick = { onSearchConnection(searchConnectionState) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(70.dp)
+                ) {
+                    Icon(
+                        Icons.Rounded.Search,
+                        modifier = Modifier.size(40.dp),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
         }
     }
 }
