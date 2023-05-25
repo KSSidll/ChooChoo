@@ -21,7 +21,7 @@ fun Navigation(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MainScreen.route
+        startDestination = SEARCH_CONNECTION_ROUTE
     ) {
         composable(SEARCH_CONNECTION_ROUTE) {
             SearchConnectionRoute(
