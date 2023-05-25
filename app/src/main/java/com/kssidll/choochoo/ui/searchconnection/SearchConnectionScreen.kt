@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kssidll.choochoo.data.data.User
 import com.kssidll.choochoo.ui.shared.OutlinedTextFieldWithExposedDropdown
@@ -45,39 +46,8 @@ fun SearchConnectionScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // header
-        Box(
-            contentAlignment = Alignment.CenterStart,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(8.dp, 0.dp)
-        ) {
 
-            // button that shows side panel
-            IconButton(
-                onClick = { /*TODO show side panel*/ }
-            ) {
-                Icon(
-                    Icons.Rounded.Menu,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(30.dp),
-                    tint = MaterialTheme.colorScheme.onPrimary)
-            }
-
-            // app logo
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Center
-            ) {
-                /* TODO create app logo and call it here*/
-                Text(
-                    text = "ChooChoo",
-                    color = MaterialTheme.colorScheme.onPrimary)
-            }
-        }
+        SearchConnectionScreenHeader(height = 50.dp)
 
         // screen content
         Column(
@@ -171,6 +141,42 @@ fun SearchConnectionScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SearchConnectionScreenHeader(height: Dp) {
+    Box(
+        contentAlignment = Alignment.CenterStart,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
+            .background(MaterialTheme.colorScheme.primary)
+            .padding(8.dp, 0.dp)
+    ) {
+
+        // button that shows side panel
+        IconButton(
+            onClick = { /*TODO show side panel*/ }
+        ) {
+            Icon(
+                Icons.Rounded.Menu,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(30.dp),
+                tint = MaterialTheme.colorScheme.onPrimary)
+        }
+
+        // app logo
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Center
+        ) {
+            /* TODO create app logo and call it here*/
+            Text(
+                text = "ChooChoo",
+                color = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }
