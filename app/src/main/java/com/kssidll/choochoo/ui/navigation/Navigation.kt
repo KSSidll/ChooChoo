@@ -26,6 +26,7 @@ fun Navigation(
         composable(SEARCH_CONNECTION_ROUTE) {
             SearchConnectionRoute(
                 onSearchConnection = {
+                    // TODO create showconnections screen and pass SearchConnectionState into it
                     navController.navigate(SHOW_CONNECTIONS_ROUTE)
                 }
             )

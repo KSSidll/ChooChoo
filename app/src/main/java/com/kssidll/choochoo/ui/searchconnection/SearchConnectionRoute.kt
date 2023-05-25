@@ -3,15 +3,18 @@ package com.kssidll.choochoo.ui.searchconnection
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kssidll.choochoo.data.data.User
 
 @Composable
 fun SearchConnectionRoute(
-        onSearchConnection: () -> Unit
+        onSearchConnection: (SearchConnectionState) -> Unit
 ) {
     val searchConnectionViewModel: SearchConnectionViewModel = hiltViewModel()
 
     SearchConnectionScreen(
         onSearchConnection = onSearchConnection,
-        searchConnectionViewModel.getStations().collectAsState(initial = listOf()).value
+        stations = searchConnectionViewModel.getStations().collectAsState(initial = listOf()).value.map { station -> station.name },
+        // TODO get current user
+        user = User("","")
     )
 }
