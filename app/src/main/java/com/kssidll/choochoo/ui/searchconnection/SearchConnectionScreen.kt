@@ -14,11 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,11 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kssidll.choochoo.data.data.User
 import com.kssidll.choochoo.ui.shared.OutlinedTextFieldWithExposedDropdown
@@ -42,57 +38,12 @@ fun SearchConnectionScreen(
         stations: List<String>,
         user: User
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 12.dp)
-    ) {
-
-        SearchConnectionScreenHeader(
-            height = 50.dp
-        )
-
+    Box(modifier = Modifier.padding(horizontal = 12.dp)) {
         SearchConnectionScreenContent(
             onSearchConnection = onSearchConnection,
             stations = stations,
             user = user
         )
-
-    }
-}
-
-@Composable
-fun SearchConnectionScreenHeader(height: Dp) {
-    Box(
-        contentAlignment = Alignment.CenterStart,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .background(MaterialTheme.colorScheme.primary)
-    ) {
-
-        // button that shows side panel
-        IconButton(
-            onClick = { /*TODO show side panel*/ }
-        ) {
-            Icon(
-                Icons.Rounded.Menu,
-                contentDescription = "Toggle navigation drawer",
-                modifier = Modifier
-                    .size(30.dp),
-                tint = MaterialTheme.colorScheme.onPrimary)
-        }
-
-        // app logo
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Center
-        ) {
-            /* TODO create app logo and call it here*/
-            Text(
-                text = "ChooChoo",
-                color = MaterialTheme.colorScheme.onPrimary)
-        }
     }
 }
 

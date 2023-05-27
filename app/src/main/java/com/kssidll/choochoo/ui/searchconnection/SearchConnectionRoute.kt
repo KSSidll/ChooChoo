@@ -7,7 +7,7 @@ import com.kssidll.choochoo.data.data.User
 
 @Composable
 fun SearchConnectionRoute(
-        onSearchConnection: (SearchConnectionState) -> Unit
+    onSearchConnection: (SearchConnectionState) -> Unit
 ) {
     val searchConnectionViewModel: SearchConnectionViewModel = hiltViewModel()
 
