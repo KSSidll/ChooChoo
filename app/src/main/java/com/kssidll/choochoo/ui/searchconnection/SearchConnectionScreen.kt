@@ -77,7 +77,7 @@ fun SearchConnectionScreenHeader(height: Dp) {
         ) {
             Icon(
                 Icons.Rounded.Menu,
-                contentDescription = null,
+                contentDescription = "Toggle navigation drawer",
                 modifier = Modifier
                     .size(30.dp),
                 tint = MaterialTheme.colorScheme.onPrimary)
@@ -185,7 +185,7 @@ fun SearchConnectionScreenContent(
                     Icon(
                         Icons.Rounded.Search,
                         modifier = Modifier.size(40.dp),
-                        contentDescription = null,
+                        contentDescription = "Search for connections that match set Origin and Destination",
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
