@@ -2,10 +2,13 @@ package com.kssidll.choochoo.di.module
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.kssidll.choochoo.data.dao.StationDao
 import com.kssidll.choochoo.data.dao.TicketDao
 import com.kssidll.choochoo.data.dao.UserDao
 import com.kssidll.choochoo.data.database.AppDatabase
+import com.kssidll.choochoo.data.database.prepopulateStationData
 import com.kssidll.choochoo.data.repository.IStationRepository
 import com.kssidll.choochoo.data.repository.ITicketRepository
 import com.kssidll.choochoo.data.repository.IUserRepository
@@ -30,7 +33,18 @@ class DatabaseModule {
             appContext.applicationContext,
             AppDatabase::class.java,
             "app_database"
-        ).build()
+        ).addCallback(object : RoomDatabase.Callback() {
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+
+                // prepopulate the database
+                // we do that with a function but it is preffered and recommended
+                // to prepopulate via prepackaged database file
+                for (data in prepopulateStationData()) {
+                    db.execSQL("INSERT INTO station (name) VALUES('${data.name}');")
+                }
+            }
+        }).build()
     }
 
     @Provides
