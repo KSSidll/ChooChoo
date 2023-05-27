@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,9 +42,16 @@ fun SearchConnectionScreen(
         stations: List<String>,
         user: User
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 12.dp)
+    ) {
 
-        SearchConnectionScreenHeader(height = 50.dp)
+        SearchConnectionScreenHeader(
+            height = 50.dp
+        )
+
         SearchConnectionScreenContent(
             onSearchConnection = onSearchConnection,
             stations = stations,
@@ -61,7 +69,6 @@ fun SearchConnectionScreenHeader(height: Dp) {
             .fillMaxWidth()
             .height(height)
             .background(MaterialTheme.colorScheme.primary)
-            .padding(8.dp, 0.dp)
     ) {
 
         // button that shows side panel
@@ -99,11 +106,7 @@ fun SearchConnectionScreenContent(
         mutableStateOf(SearchConnectionState())
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp, 0.dp)
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxHeight(0.3F)
@@ -111,9 +114,7 @@ fun SearchConnectionScreenContent(
             verticalArrangement = Arrangement.Center
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 3.dp),
+                modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Center
             ) {
                 OutlinedTextFieldWithExposedDropdown(
@@ -125,10 +126,10 @@ fun SearchConnectionScreenContent(
                 )
             }
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 3.dp),
+                modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Center
             ) {
                 OutlinedTextFieldWithExposedDropdown(
