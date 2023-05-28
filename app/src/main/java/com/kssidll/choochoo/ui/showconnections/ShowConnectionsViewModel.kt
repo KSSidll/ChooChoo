@@ -8,6 +8,7 @@ import com.kssidll.choochoo.data.repository.IStationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnectionRepository, stationRepository: IStationRepository) : ViewModel() {
@@ -30,7 +31,7 @@ class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnec
         val connections = getConnections(origin, destination)
 
         if (connections.isEmpty()) {
-            formattedConnections = generateConnections(amount = 3)
+            formattedConnections = generateConnections(amount = Random.nextInt(2,6))
 
             insertAllData(formattedConnections)
         } else {
