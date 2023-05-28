@@ -12,13 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,6 +23,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kssidll.choochoo.ui.shared.SecondaryAppBar
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -42,46 +38,7 @@ fun ShowConnectionsScreen(
     onBackClick: () -> Unit
 ) {
     Column {
-        ShowConnectionsScreenAppBar(
-            origin = origin,
-            destination = destination,
-            onBackClick = onBackClick
-        )
-        ShowConnectionsScreenContent(
-            connectionsData = connectionsData,
-            onConnectionSelect = onConnectionSelect
-        )
-    }
-}
-
-@Composable
-fun ShowConnectionsScreenAppBar(
-    origin: String,
-    destination: String,
-    onBackClick: () -> Unit
-) {
-    Box(
-        contentAlignment = Alignment.CenterStart,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-    ) {
-
-        IconButton(
-            onClick = onBackClick
-        ) {
-            Icon(
-                Icons.Rounded.ArrowBack,
-                contentDescription = "Go back",
-                modifier = Modifier.size(30.dp),
-                tint = MaterialTheme.colorScheme.onPrimary
-            )
-        }
-
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
+        SecondaryAppBar(onBackClick = onBackClick) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = origin,
@@ -93,6 +50,11 @@ fun ShowConnectionsScreenAppBar(
                 )
             }
         }
+
+        ShowConnectionsScreenContent(
+            connectionsData = connectionsData,
+            onConnectionSelect = onConnectionSelect
+        )
     }
 }
 
