@@ -149,7 +149,7 @@ fun ShowConnectionsScreenContent(
     }
 }
 
-@Preview(group = "ShowConnectionsScreen", name = "Show Connections Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+//@Preview(group = "ShowConnectionsScreen", name = "Show Connections Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(group = "ShowConnectionsScreen", name = "Show Connections Dark", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ShowConnectionsScreenPreview() {
