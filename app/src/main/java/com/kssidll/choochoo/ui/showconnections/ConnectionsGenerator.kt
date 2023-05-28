@@ -1,11 +1,8 @@
 package com.kssidll.choochoo.ui.showconnections
 
-import java.sql.Time
 import kotlin.random.Random
 
-fun generateConnections(
-    amount: Int
-): List<ConnectionData> {
+fun generateConnections(amount: Int): List<ConnectionData> {
     return buildList(capacity = amount) {
         for (i in 1 .. amount) {
             val departureHour: Int = Random.nextInt(0,20)
@@ -18,14 +15,14 @@ fun generateConnections(
             this.add(
                 ConnectionData(
                     price = price,
-                    timeDeparture = Time(departureHour, departureMinute).time,
-                    timeArrival = Time(arrivalHour, arrivalMinute).time
+                    timeDeparture = time(departureHour, departureMinute),
+                    timeArrival = time(arrivalHour, arrivalMinute)
                 )
             )
         }
     }.sortedBy { connectionData -> connectionData.timeDeparture }
 }
 
-fun Time(hour: Int, minute: Int): Time {
-    return Time(((1000*60*60*(hour-1)) + (1000*60*minute)).toLong())
+fun time(hour: Int, minute: Int): Long {
+    return (1000*60*60*(hour-1)) + (1000*60*minute).toLong()
 }

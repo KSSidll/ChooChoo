@@ -20,7 +20,7 @@ import com.kssidll.choochoo.ui.theme.ChooChooTheme
 
 @Composable
 fun SecondaryAppBar(
-    onBackClick: () -> Unit,
+    onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
     Box(
@@ -31,7 +31,7 @@ fun SecondaryAppBar(
     ) {
 
         IconButton(
-            onClick = onBackClick
+            onClick = onBack
         ) {
             Icon(
                 Icons.Rounded.ArrowBack,
@@ -59,7 +59,7 @@ fun SecondaryAppBarPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             SecondaryAppBar(
-                onBackClick = {}
+                onBack = {}
             ){}
         }
     }

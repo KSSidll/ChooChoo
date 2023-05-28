@@ -54,7 +54,7 @@ fun Navigation(
                 onConnectionSelect = {
                     /*TODO show screen with connection Data*/
                 },
-                onBackClick = {
+                onBack = {
                     navController.popBackStack()
                 }
             )

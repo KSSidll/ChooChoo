@@ -35,10 +35,10 @@ fun ShowConnectionsScreen(
     destination: String,
     connectionsData: List<ConnectionData>,
     onConnectionSelect: (ConnectionData) -> Unit,
-    onBackClick: () -> Unit
+    onBack: () -> Unit
 ) {
     Column {
-        SecondaryAppBar(onBackClick = onBackClick) {
+        SecondaryAppBar(onBack = onBack) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = origin,
@@ -118,7 +118,7 @@ fun ShowConnectionsScreenPreview() {
                 destination = "Destination",
                 connectionsData = generateConnections(3),
                 onConnectionSelect = {},
-                onBackClick = {}
+                onBack = {}
             )
         }
     }

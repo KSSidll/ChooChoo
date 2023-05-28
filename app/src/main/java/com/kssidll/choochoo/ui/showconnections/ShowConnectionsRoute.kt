@@ -16,7 +16,7 @@ fun ShowConnectionsRoute(
     origin: String,
     destination: String,
     onConnectionSelect: (ConnectionData) -> Unit,
-    onBackClick: () -> Unit
+    onBack: () -> Unit
 ) {
     val showConnectionsViewModel: ShowConnectionsViewModel = hiltViewModel()
     val scope = rememberCoroutineScope()
@@ -39,7 +39,7 @@ fun ShowConnectionsRoute(
             destination = destination,
             connectionsData = showConnectionsViewModel.formattedConnections,
             onConnectionSelect = onConnectionSelect,
-            onBackClick = onBackClick
+            onBack = onBack
         )
     }
 
