@@ -39,7 +39,7 @@ fun AppScaffold(
     ) {
         Scaffold(
             topBar = {
-                AppBar(
+                MainAppBar(
                     onNavigationIconClick = {
                         scope.launch {
                             drawerState.apply {

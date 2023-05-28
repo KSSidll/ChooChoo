@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 
 @Composable
-fun AppBar(
+fun MainAppBar(
     onNavigationIconClick: () -> Unit
 ) {
     Box(
@@ -55,15 +55,15 @@ fun AppBar(
     }
 }
 
-@Preview(group = "AppBar", name = "AppBar Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(group = "AppBar", name = "AppBar Dark", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(group = "MainAppBar", name = "Main App Bar Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(group = "MainAppBar", name = "Main App Bar Dark", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun AppBarPreview() {
+fun MainAppBarPreview() {
     ChooChooTheme {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            AppBar(
+            MainAppBar(
                 onNavigationIconClick = {}
             )
         }
