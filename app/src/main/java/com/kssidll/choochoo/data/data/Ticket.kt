@@ -5,16 +5,16 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"], onDelete = ForeignKey.CASCADE),
-                       ForeignKey(entity = Station::class, parentColumns = ["id"], childColumns = ["originId"], onDelete = ForeignKey.CASCADE),
-                       ForeignKey(entity = Station::class, parentColumns = ["id"], childColumns = ["destinationId"], onDelete = ForeignKey.CASCADE)])
+@Entity(
+    foreignKeys = [
+        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"], onDelete = ForeignKey.CASCADE),
+        ForeignKey(entity = Connection::class, parentColumns = ["id"], childColumns = ["connectionId"], onDelete = ForeignKey.CASCADE)
+    ])
 data class Ticket(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(index = true) val userId: Int,
-    @ColumnInfo(index = true) val originId: Int,
-    @ColumnInfo(index = true) val destinationId: Int,
-    val price: Int,
+    @ColumnInfo(index = true) val connectionId: Int,
     var active: Boolean
 ) {
-    constructor(userId: Int, originId: Int, destinationId: Int, price: Int) : this(0, userId, originId, destinationId, price, true)
+    constructor(userId: Int, connectionId: Int) : this(0, userId, connectionId, true)
 }
