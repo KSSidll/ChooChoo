@@ -11,10 +11,22 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StationDao {
     @Query("SELECT * FROM station ORDER BY id ASC")
-    fun getAll(): Flow<List<Station>>
+    suspend fun getAll(): List<Station>
+
+    @Query("SELECT * FROM station ORDER BY id ASC")
+    fun getAllFlow(): Flow<List<Station>>
 
     @Query("SELECT * FROM station WHERE id == :id")
-    fun get(id: Int): Flow<Station>
+    suspend fun get(id: Int): Station
+
+    @Query("SELECT * FROM station WHERE id == :id")
+    fun getFlow(id: Int): Flow<Station>
+
+    @Query("SELECT * FROM station WHERE name == :name")
+    suspend fun getByName(name: String): Station
+
+    @Query("SELECT * FROM station WHERE name == :name")
+    fun getByNameFlow(name: String): Flow<Station>
 
     @Insert
     suspend fun insert(station: Station)

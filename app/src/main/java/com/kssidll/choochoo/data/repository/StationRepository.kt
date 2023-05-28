@@ -6,12 +6,28 @@ import kotlinx.coroutines.flow.Flow
 
 class StationRepository(private val stationDao: StationDao) : IStationRepository {
 
-    override fun getAll(): Flow<List<Station>> {
+    override suspend fun getAll(): List<Station> {
         return stationDao.getAll()
     }
 
-    override fun get(id: Int): Flow<Station> {
+    override fun getAllFlow(): Flow<List<Station>> {
+        return stationDao.getAllFlow()
+    }
+
+    override suspend fun get(id: Int): Station {
         return stationDao.get(id)
+    }
+
+    override fun getFlow(id: Int): Flow<Station> {
+        return stationDao.getFlow(id)
+    }
+
+    override suspend fun getByName(name: String): Station {
+        return stationDao.getByName(name)
+    }
+
+    override fun getByNameFlow(name: String): Flow<Station> {
+        return stationDao.getByNameFlow(name)
     }
 
     override suspend fun insert(station: Station) {
