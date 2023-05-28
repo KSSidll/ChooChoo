@@ -91,9 +91,6 @@ fun SearchConnectionScreenContent(
                     modifier = Modifier.background(MaterialTheme.colorScheme.primary)
                 )
             }
-
-            // TODO time form
-
         }
 
         Column(
@@ -128,7 +125,10 @@ fun SearchConnectionScreenContent(
             ) {
 
                 Button(
-                    onClick = { onSearchConnection(searchConnectionState) },
+                    onClick = {
+                        /*TODO assert both fields are filled and correct, change border to error when not*/
+                        onSearchConnection(searchConnectionState)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
