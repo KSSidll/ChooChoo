@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.kssidll.choochoo.data.dao.ConnectionDao
 import com.kssidll.choochoo.data.dao.StationDao
 import com.kssidll.choochoo.data.dao.TicketDao
 import com.kssidll.choochoo.data.dao.UserDao
 import com.kssidll.choochoo.data.database.AppDatabase
 import com.kssidll.choochoo.data.database.prepopulateStationData
+import com.kssidll.choochoo.data.repository.ConnectionRepository
+import com.kssidll.choochoo.data.repository.IConnectionRepository
 import com.kssidll.choochoo.data.repository.IStationRepository
 import com.kssidll.choochoo.data.repository.ITicketRepository
 import com.kssidll.choochoo.data.repository.IUserRepository
@@ -75,6 +78,16 @@ class DatabaseModule {
     @Provides
     fun provideStationRepository(stationDao: StationDao): IStationRepository {
         return StationRepository(stationDao)
+    }
+
+    @Provides
+    fun provideConnectionDao(appDatabase: AppDatabase): ConnectionDao {
+        return appDatabase.getConnectionDao()
+    }
+
+    @Provides
+    fun provideConnectionRepository(connectionDao: ConnectionDao): IConnectionRepository {
+        return ConnectionRepository(connectionDao)
     }
 
 

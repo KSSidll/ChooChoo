@@ -35,20 +35,18 @@ import java.util.Locale
 
 @Composable
 fun ShowConnectionsScreen(
-    origin: String,
-    destination: String,
+    connectionsData: List<ConnectionData>,
     onConnectionSelect: (ConnectionData) -> Unit,
     onBackClick: () -> Unit
 ) {
     Column {
         ShowConnectionsScreenAppBar(
-            origin = origin,
-            destination = destination,
+            origin = connectionsData[0].origin,
+            destination = connectionsData[0].destination,
             onBackClick = onBackClick
         )
         ShowConnectionsScreenContent(
-            origin = origin,
-            destination = destination,
+            connectionsData = connectionsData,
             onConnectionSelect = onConnectionSelect
         )
     }
@@ -99,16 +97,9 @@ fun ShowConnectionsScreenAppBar(
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun ShowConnectionsScreenContent(
-    origin: String,
-    destination: String,
+    connectionsData: List<ConnectionData>,
     onConnectionSelect: (ConnectionData) -> Unit
 ) {
-    val connectionsData = generateConnections(
-        amount = 3,
-        origin = origin,
-        destination = destination
-    )
-
     LazyColumn {
         for (i in 0..30) {
             this.item {
@@ -159,8 +150,7 @@ fun ShowConnectionsScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ShowConnectionsScreen(
-                origin = "origin",
-                destination = "destination",
+                connectionsData = generateConnections(3, "Origin", "Destination"),
                 onConnectionSelect = {},
                 onBackClick = {}
             )

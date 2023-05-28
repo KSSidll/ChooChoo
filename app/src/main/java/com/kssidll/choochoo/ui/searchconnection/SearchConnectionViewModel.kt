@@ -19,6 +19,6 @@ class SearchConnectionViewModel @Inject constructor(userRepository: IUserReposit
     }
 
     fun getStations(): Flow<List<Station>> {
-        return stationRepository.getAll()
+        return stationRepository.getAllFlow()
     }
 }

@@ -14,10 +14,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
+import java.sql.Time
+import java.util.Locale
 
 @Composable
 fun ConnectionItem(
@@ -27,7 +30,7 @@ fun ConnectionItem(
     Column(modifier = modifier.fillMaxWidth()) {
         Row ( verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = connectionData.timeDeparture.toString().substring(0, 5),
+                text = Time(connectionData.timeDeparture).toString().substring(0, 5),
                 fontSize = 20.sp
             )
             Icon(
@@ -36,13 +39,20 @@ fun ConnectionItem(
                 Modifier.size(25.dp)
             )
             Text(
-                text = connectionData.timeArrival.toString().substring(0, 5),
+                text = Time(connectionData.timeArrival).toString().substring(0, 5),
                 fontSize = 20.sp
+            )
+
+            val price = connectionData.price.toFloat() / 100
+            Text(
+                text = String.format(Locale("en", "US"), "$%.2f", price),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.End
             )
         }
         Text(
-            text = "${connectionData.travelTime.toString().substring(0,2).removePrefix("0")}h" +
-                    connectionData.travelTime.toString().substring(3,5),
+            text = "${Time(connectionData.timeArrival - connectionData.timeDeparture).toString().substring(0,2).removePrefix("0")}h" +
+                    Time(connectionData.timeArrival - connectionData.timeDeparture).toString().substring(3,5),
             fontSize = 12.sp
         )
     }
@@ -57,7 +67,7 @@ fun ConnectionItemPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ConnectionItem(
-                connectionData = ConnectionData("origin", "destination", Time(13,20), Time(17,15), Time(17-13, 15-20)),
+                connectionData = generateConnections(1,"","")[0],
             )
         }
     }

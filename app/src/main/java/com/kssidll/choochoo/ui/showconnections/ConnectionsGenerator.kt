@@ -15,13 +15,15 @@ fun generateConnections(
             val arrivalHour: Int = Random.nextInt(departureHour+1,24)
             val arrivalMinute: Int = Random.nextInt(0,60)
 
+            val price: Int = Random.nextInt(400, 2000)
+
             this.add(
                 ConnectionData(
                     origin = origin,
                     destination = destination,
-                    timeDeparture = Time(departureHour, departureMinute),
-                    timeArrival = Time(arrivalHour, arrivalMinute),
-                    travelTime = Time(arrivalHour - departureHour, arrivalMinute - departureMinute)
+                    price = price,
+                    timeDeparture = Time(departureHour, departureMinute).time,
+                    timeArrival = Time(arrivalHour, arrivalMinute).time
                 )
             )
         }
