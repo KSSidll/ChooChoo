@@ -7,4 +7,5 @@ data class ConnectionData(
     val destination: String,
     val timeDeparture: Time,
     val timeArrival: Time,
+    val travelTime: Time
 )
