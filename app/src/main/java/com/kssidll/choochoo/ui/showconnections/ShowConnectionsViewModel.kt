@@ -13,6 +13,8 @@ import javax.inject.Inject
 class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnectionRepository, stationRepository: IStationRepository) : ViewModel() {
     private val connectionRepository: IConnectionRepository
     private val stationRepository: IStationRepository
+    private var origin: String = ""
+    private var destination: String = ""
 
     var formattedConnections: List<ConnectionData> = listOf()
 
@@ -22,21 +24,18 @@ class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnec
     }
 
     suspend fun fetchData(origin: String, destination: String) {
+        this.origin = origin
+        this.destination = destination
+
         val connections = getConnections(origin, destination)
 
         if (connections.isEmpty()) {
-            formattedConnections = generateConnections(
-                amount = 3,
-                origin = origin,
-                destination = destination
-            )
+            formattedConnections = generateConnections(amount = 3)
 
             insertAllData(formattedConnections)
         } else {
             formattedConnections = connections.map {
                 ConnectionData(
-                    origin = origin,
-                    destination = destination,
                     timeDeparture = it.timeDeparture,
                     timeArrival = it.timeArrival,
                     price = it.price
@@ -63,8 +62,8 @@ class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnec
     fun insertAllData(connections: List<ConnectionData>) = viewModelScope.launch {
         insertAll(connections.map {
             Connection(
-                originId = stationRepository.getByName(it.origin).id,
-                destinationId = stationRepository.getByName(it.destination).id,
+                originId = stationRepository.getByName(origin).id,
+                destinationId = stationRepository.getByName(destination).id,
                 price = it.price,
                 timeArrival = it.timeArrival,
                 timeDeparture = it.timeDeparture

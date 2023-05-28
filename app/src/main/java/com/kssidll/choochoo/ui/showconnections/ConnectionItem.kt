@@ -67,7 +67,7 @@ fun ConnectionItemPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ConnectionItem(
-                connectionData = generateConnections(1,"","")[0],
+                connectionData = generateConnections(1)[0],
             )
         }
     }

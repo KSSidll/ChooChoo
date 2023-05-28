@@ -35,6 +35,8 @@ fun ShowConnectionsRoute(
         Loading()
     } else {
         ShowConnectionsScreen(
+            origin = origin,
+            destination = destination,
             connectionsData = showConnectionsViewModel.formattedConnections,
             onConnectionSelect = onConnectionSelect,
             onBackClick = onBackClick

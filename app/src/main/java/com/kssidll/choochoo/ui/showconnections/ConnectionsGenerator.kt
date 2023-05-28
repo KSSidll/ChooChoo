@@ -4,9 +4,7 @@ import java.sql.Time
 import kotlin.random.Random
 
 fun generateConnections(
-    amount: Int,
-    origin: String,
-    destination: String,
+    amount: Int
 ): List<ConnectionData> {
     return buildList(capacity = amount) {
         for (i in 1 .. amount) {
@@ -19,8 +17,6 @@ fun generateConnections(
 
             this.add(
                 ConnectionData(
-                    origin = origin,
-                    destination = destination,
                     price = price,
                     timeDeparture = Time(departureHour, departureMinute).time,
                     timeArrival = Time(arrivalHour, arrivalMinute).time

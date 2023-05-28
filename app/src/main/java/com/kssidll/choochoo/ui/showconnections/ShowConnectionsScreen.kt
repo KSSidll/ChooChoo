@@ -35,14 +35,16 @@ import java.util.Locale
 
 @Composable
 fun ShowConnectionsScreen(
+    origin: String,
+    destination: String,
     connectionsData: List<ConnectionData>,
     onConnectionSelect: (ConnectionData) -> Unit,
     onBackClick: () -> Unit
 ) {
     Column {
         ShowConnectionsScreenAppBar(
-            origin = connectionsData[0].origin,
-            destination = connectionsData[0].destination,
+            origin = origin,
+            destination = destination,
             onBackClick = onBackClick
         )
         ShowConnectionsScreenContent(
@@ -150,7 +152,9 @@ fun ShowConnectionsScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ShowConnectionsScreen(
-                connectionsData = generateConnections(3, "Origin", "Destination"),
+                origin = "Origin",
+                destination = "Destination",
+                connectionsData = generateConnections(3),
                 onConnectionSelect = {},
                 onBackClick = {}
             )
