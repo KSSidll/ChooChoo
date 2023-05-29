@@ -14,14 +14,6 @@ class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
         return ticketDao.get(id)
     }
 
-    override fun getByUserId(userId: Int): Flow<List<Ticket>> {
-        return ticketDao.getByUserId(userId)
-    }
-
-    override fun getByUserIdAll(userId: Int): Flow<List<Ticket>> {
-        return ticketDao.getByUserIdAll(userId)
-    }
-
     override suspend fun insert(ticket: Ticket) {
         ticketDao.insert(ticket)
     }

@@ -16,12 +16,6 @@ interface TicketDao {
     @Query("SELECT * FROM ticket WHERE id == :id")
     fun get(id: Int): Flow<Ticket>
 
-    @Query("SELECT * FROM ticket WHERE userId == :userId AND active == 1")
-    fun getByUserId(userId: Int): Flow<List<Ticket>>
-
-    @Query("SELECT * FROM ticket WHERE userId == :userId")
-    fun getByUserIdAll(userId: Int): Flow<List<Ticket>>
-
     @Insert
     suspend fun insert(ticket: Ticket)
 
