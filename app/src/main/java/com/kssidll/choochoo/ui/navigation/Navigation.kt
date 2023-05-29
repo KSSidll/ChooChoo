@@ -7,9 +7,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.kssidll.choochoo.ui.navigation.Destinations.BASE_ROUTE
+import com.kssidll.choochoo.ui.navigation.Destinations.INITIAL_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SEARCH_CONNECTION_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTIONS_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTION_DETAILS_ROUTE
+import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_TICKETS_ROUTE
 import com.kssidll.choochoo.ui.searchconnection.SearchConnectionRoute
 import com.kssidll.choochoo.ui.shared.AppScaffold
 import com.kssidll.choochoo.ui.showconnectiondetails.ShowConnectionDetailsRoute
@@ -20,6 +23,9 @@ object Destinations {
     const val SHOW_CONNECTIONS_ROUTE = "showconnections"
     const val SHOW_CONNECTION_DETAILS_ROUTE = "showconnectiondetails"
     const val SHOW_TICKETS_ROUTE = "showtickets"
+
+    const val BASE_ROUTE = SEARCH_CONNECTION_ROUTE
+    const val INITIAL_ROUTE = SEARCH_CONNECTION_ROUTE
 }
 
 @Composable
@@ -29,7 +35,7 @@ fun Navigation(
 
     NavHost(
         navController = navController,
-        startDestination = SEARCH_CONNECTION_ROUTE
+        startDestination = INITIAL_ROUTE
     ) {
         composable(SEARCH_CONNECTION_ROUTE) {
             AppScaffold(
