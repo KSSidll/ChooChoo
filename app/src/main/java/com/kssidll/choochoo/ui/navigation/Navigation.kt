@@ -17,6 +17,7 @@ import com.kssidll.choochoo.ui.searchconnection.SearchConnectionRoute
 import com.kssidll.choochoo.ui.shared.AppScaffold
 import com.kssidll.choochoo.ui.showconnectiondetails.ShowConnectionDetailsRoute
 import com.kssidll.choochoo.ui.showconnections.ShowConnectionsRoute
+import com.kssidll.choochoo.ui.showtickets.ShowTicketsRoute
 
 object Destinations {
     const val SEARCH_CONNECTION_ROUTE = "searchconnection"
@@ -62,7 +63,8 @@ fun Navigation(
                     navController.popBackStack()
                 },
                 onTicketBuy = {
-                    /*TODO pop back to main screen and then go to ticket screen*/
+                    navController.popBackStack(BASE_ROUTE, false)
+                    navController.navigate(SHOW_TICKETS_ROUTE)
                 }
             )
         }
@@ -84,6 +86,15 @@ fun Navigation(
                     navController.popBackStack()
                 }
             )
+        }
+
+        composable(SHOW_TICKETS_ROUTE) {
+            AppScaffold(
+                navHostController = navController,
+                selectedNavButton = SHOW_TICKETS_ROUTE
+            ) {
+                ShowTicketsRoute()
+            }
         }
 
     }
