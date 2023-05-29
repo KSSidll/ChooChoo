@@ -64,7 +64,15 @@ fun NavigationDrawer(
             text = "Tickets",
             selected = selectedNavButton == Destinations.SHOW_TICKETS_ROUTE,
             onClick = {
-                /*TODO navigate to tickets*/
+                scope.launch {
+                    if (selectedNavButton != Destinations.SHOW_TICKETS_ROUTE) {
+                        onNavigation()
+                        navHostController.popBackStack(Destinations.BASE_ROUTE, false)
+                        navHostController.navigate(Destinations.SHOW_TICKETS_ROUTE)
+                    } else {
+                        onNothing()
+                    }
+                }
             },
             contentDescription = "Navigates to screen with bought tickets"
         )
