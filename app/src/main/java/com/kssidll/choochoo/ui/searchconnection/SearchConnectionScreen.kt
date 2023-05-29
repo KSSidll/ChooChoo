@@ -19,7 +19,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,21 +27,18 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.kssidll.choochoo.data.data.User
 import com.kssidll.choochoo.ui.shared.OutlinedTextFieldWithExposedDropdown
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 
 @Composable
 fun SearchConnectionScreen(
         onSearchConnection: (SearchConnectionState) -> Unit,
-        stations: List<String>,
-        user: User
+        stations: List<String>
 ) {
     Box(modifier = Modifier.padding(horizontal = 12.dp)) {
         SearchConnectionScreenContent(
             onSearchConnection = onSearchConnection,
-            stations = stations,
-            user = user
+            stations = stations
         )
     }
 }
@@ -50,8 +46,7 @@ fun SearchConnectionScreen(
 @Composable
 fun SearchConnectionScreenContent(
         onSearchConnection: (SearchConnectionState) -> Unit,
-        stations: List<String>,
-        user: User
+        stations: List<String>
 ) {
     val searchConnectionState by rememberSaveable(stateSaver = SearchConnectionStateSaver) {
         mutableStateOf(SearchConnectionState())
@@ -60,7 +55,7 @@ fun SearchConnectionScreenContent(
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
-                .fillMaxHeight(0.3F)
+                .fillMaxHeight(0.5F)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center
         ) {
@@ -90,25 +85,6 @@ fun SearchConnectionScreenContent(
                     possibleValues = stations,
                     modifier = Modifier.background(MaterialTheme.colorScheme.primary)
                 )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxHeight(0.2F)
-                .fillMaxWidth()
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Center
-            ) {
-                Text(text = user.name)
-            }
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Center
-            ) {
-                Text(text = user.surname)
             }
         }
 
@@ -156,8 +132,7 @@ fun SearchConnectionScreenPreview() {
         ) {
             SearchConnectionScreen(
                 onSearchConnection = {},
-                stations = listOf(),
-                user = User("name","surname")
+                stations = listOf()
             )
         }
     }
