@@ -33,7 +33,13 @@ fun AppScaffold(
         drawerContent = {
             NavigationDrawer(
                 navHostController = navHostController,
-                selectedNavButton = selectedNavButton
+                selectedNavButton = selectedNavButton,
+                onNavigation = {
+                    drawerState.snapTo(targetValue = DrawerValue.Closed)
+                },
+                onNothing = {
+                    drawerState.close()
+                }
             )
         }
     ) {

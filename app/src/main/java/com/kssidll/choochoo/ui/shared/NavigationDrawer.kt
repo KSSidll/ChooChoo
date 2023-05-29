@@ -15,6 +15,7 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -24,12 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.kssidll.choochoo.ui.navigation.Destinations
+import kotlinx.coroutines.launch
 
 @Composable
 fun NavigationDrawer(
     navHostController: NavHostController,
-    selectedNavButton: String
+    selectedNavButton: String,
+    onNavigation: suspend () -> Unit,
+    onNothing: suspend () -> Unit
 ) {
+    val scope = rememberCoroutineScope()
     ModalDrawerSheet(
         drawerContainerColor = MaterialTheme.colorScheme.background,
         drawerContentColor = MaterialTheme.colorScheme.onBackground
@@ -39,7 +44,15 @@ fun NavigationDrawer(
             text = "Search Connections",
             selected = selectedNavButton == Destinations.SEARCH_CONNECTION_ROUTE,
             onClick = {
-                /*TODO navigate to search connections*/
+                scope.launch {
+                    if (selectedNavButton != Destinations.SEARCH_CONNECTION_ROUTE) {
+                        onNavigation()
+                        navHostController.popBackStack(Destinations.BASE_ROUTE, false)
+                        navHostController.navigate(Destinations.SEARCH_CONNECTION_ROUTE)
+                    } else {
+                        onNothing()
+                    }
+                }
             },
             contentDescription = "Navigates to screen where you can search for connections"
         )
@@ -110,7 +123,9 @@ fun NavigationDrawerPreview() {
         ) {
             NavigationDrawer(
                 navHostController = rememberNavController(),
-                selectedNavButton = Destinations.SEARCH_CONNECTION_ROUTE
+                selectedNavButton = Destinations.SEARCH_CONNECTION_ROUTE,
+                onNavigation = {},
+                onNothing = {}
             )
         }
     }
