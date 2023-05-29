@@ -7,17 +7,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.kssidll.choochoo.data.dao.ConnectionDao
 import com.kssidll.choochoo.data.dao.StationDao
 import com.kssidll.choochoo.data.dao.TicketDao
-import com.kssidll.choochoo.data.dao.UserDao
 import com.kssidll.choochoo.data.database.AppDatabase
 import com.kssidll.choochoo.data.database.prepopulateStationData
 import com.kssidll.choochoo.data.repository.ConnectionRepository
 import com.kssidll.choochoo.data.repository.IConnectionRepository
 import com.kssidll.choochoo.data.repository.IStationRepository
 import com.kssidll.choochoo.data.repository.ITicketRepository
-import com.kssidll.choochoo.data.repository.IUserRepository
 import com.kssidll.choochoo.data.repository.StationRepository
 import com.kssidll.choochoo.data.repository.TicketRepository
-import com.kssidll.choochoo.data.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,16 +45,6 @@ class DatabaseModule {
                 }
             }
         }).build()
-    }
-
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase): UserDao {
-        return appDatabase.getUserDao()
-    }
-
-    @Provides
-    fun provideUserRepository(userDao: UserDao): IUserRepository {
-        return UserRepository(userDao)
     }
 
     @Provides
