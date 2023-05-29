@@ -41,10 +41,10 @@ interface ConnectionDao {
     fun getByOriginDestinationIdFlow(originId: Int, destinationId: Int): Flow<List<Connection>>
 
     @Insert
-    suspend fun insert(station: Connection)
+    suspend fun insert(station: Connection): Long
 
     @Insert
-    suspend fun insertAll(stations: List<Connection>)
+    suspend fun insertAll(stations: List<Connection>): List<Long>
 
     @Update
     suspend fun update(station: Connection)

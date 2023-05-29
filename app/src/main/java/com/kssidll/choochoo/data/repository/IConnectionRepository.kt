@@ -14,8 +14,8 @@ interface IConnectionRepository {
     fun getByDestinationIdFlow(destinationId: Int): Flow<List<Connection>>
     suspend fun getByOriginDestinationId(originId: Int, destinationId: Int): List<Connection>
     fun getByOriginDestinationIdFlow(originId: Int, destinationId: Int): Flow<List<Connection>>
-    suspend fun insert(connection: Connection)
-    suspend fun insertAll(stations: List<Connection>)
+    suspend fun insert(connection: Connection): Long
+    suspend fun insertAll(stations: List<Connection>): List<Long>
     suspend fun update(connection: Connection)
     suspend fun delete(connection: Connection)
 }

@@ -46,12 +46,12 @@ class ConnectionRepository(private val connectionDao: ConnectionDao) : IConnecti
         return connectionDao.getByOriginDestinationIdFlow(originId, destinationId)
     }
 
-    override suspend fun insert(connection: Connection) {
-        connectionDao.insert(connection)
+    override suspend fun insert(connection: Connection): Long {
+        return connectionDao.insert(connection)
     }
 
-    override suspend fun insertAll(stations: List<Connection>) {
-        connectionDao.insertAll(stations)
+    override suspend fun insertAll(stations: List<Connection>): List<Long> {
+        return connectionDao.insertAll(stations)
     }
 
     override suspend fun update(connection: Connection) {
