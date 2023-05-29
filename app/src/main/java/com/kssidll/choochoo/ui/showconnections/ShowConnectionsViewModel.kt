@@ -1,12 +1,11 @@
 package com.kssidll.choochoo.ui.showconnections
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.kssidll.choochoo.data.data.Connection
+import com.kssidll.choochoo.data.data.Station
 import com.kssidll.choochoo.data.repository.IConnectionRepository
 import com.kssidll.choochoo.data.repository.IStationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -14,8 +13,8 @@ import kotlin.random.Random
 class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnectionRepository, stationRepository: IStationRepository) : ViewModel() {
     private val connectionRepository: IConnectionRepository
     private val stationRepository: IStationRepository
-    private var origin: String = ""
-    private var destination: String = ""
+    private lateinit var origin: Station
+    private lateinit var destination: Station
 
     var formattedConnections: List<ConnectionData> = listOf()
 
@@ -25,18 +24,24 @@ class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnec
     }
 
     suspend fun fetchData(origin: String, destination: String) {
-        this.origin = origin
-        this.destination = destination
+        this.origin = stationRepository.getByName(origin)
+        this.destination = stationRepository.getByName(destination)
 
-        val connections = getConnections(origin, destination)
+        val connections = getConnections(this.origin.id, this.destination.id)
 
         if (connections.isEmpty()) {
             formattedConnections = generateConnections(amount = Random.nextInt(2,6))
 
-            insertAllData(formattedConnections)
+            val ids = insertAllData(formattedConnections)
+
+            for (i in ids.indices) {
+                formattedConnections[i].id = ids[i].toInt()
+            }
+
         } else {
             formattedConnections = connections.map {
                 ConnectionData(
+                    id = it.id,
                     timeDeparture = it.timeDeparture,
                     timeArrival = it.timeArrival,
                     price = it.price
@@ -49,22 +54,15 @@ class ShowConnectionsViewModel @Inject constructor(connectionRepository: IConnec
         return connectionRepository.getByOriginDestinationId(originId, destinationId)
     }
 
-    suspend fun getConnections(origin: String, destination: String): List<Connection> {
-        return getConnections(
-            originId = stationRepository.getByName(origin).id,
-            destinationId = stationRepository.getByName(destination).id
-        )
+    suspend fun insertAll(connections: List<Connection>): List<Long> {
+        return connectionRepository.insertAll(connections)
     }
 
-    fun insertAll(connections: List<Connection>) = viewModelScope.launch {
-        connectionRepository.insertAll(connections)
-    }
-
-    fun insertAllData(connections: List<ConnectionData>) = viewModelScope.launch {
-        insertAll(connections.map {
+    suspend fun insertAllData(connections: List<ConnectionData>): List<Long> {
+        return insertAll(connections.map {
             Connection(
-                originId = stationRepository.getByName(origin).id,
-                destinationId = stationRepository.getByName(destination).id,
+                originId = origin.id,
+                destinationId = destination.id,
                 price = it.price,
                 timeArrival = it.timeArrival,
                 timeDeparture = it.timeDeparture
