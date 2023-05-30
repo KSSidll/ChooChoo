@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -48,14 +47,14 @@ fun ShowTicketsScreenContent(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = dateFormatter.format(Date(group.key)),
+                    text = dateFormatter.format(group.key),
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 20.sp
                 )
             }
             Column {
                 for ((index, ticket) in group.value.withIndex()) {
-                    Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)) {
+                    Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                         TicketItem(ticket = ticket)
                     }
                     if (index < group.value.lastIndex) {

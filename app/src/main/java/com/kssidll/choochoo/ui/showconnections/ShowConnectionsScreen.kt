@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
@@ -19,10 +18,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kssidll.choochoo.ui.shared.SecondaryAppBar
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 import java.text.SimpleDateFormat
@@ -68,23 +67,21 @@ fun ShowConnectionsScreenContent(
         for (i in 0..30) {
             val currentTime = Calendar.getInstance().time
             val time = currentTime.time.plus(i*1000*60*60*24)
-            val formatter = SimpleDateFormat("dd MMM", Locale.ENGLISH)
+            val formatter = SimpleDateFormat("dd MMM, E", Locale.ENGLISH)
 
             this.item {
-                Box(
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(40.dp)
                         .background(MaterialTheme.colorScheme.primary)
+                        .padding(8.dp),
+                    horizontalArrangement = Center
                 ) {
-                    Row(
-                        horizontalArrangement = Center,
-                        verticalAlignment = CenterVertically,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-
-                        Text(text = formatter.format(time).toString())
-                    }
+                    Text(
+                        text = formatter.format(time),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontSize = 20.sp
+                    )
                 }
             }
             for (connection in connectionsData) {
@@ -97,7 +94,7 @@ fun ShowConnectionsScreenContent(
                             )
                         }
                         if (connection != connectionsData.last()) {
-                            Divider()
+                            Divider(color = MaterialTheme.colorScheme.primary)
                         }
                     }
                 }
