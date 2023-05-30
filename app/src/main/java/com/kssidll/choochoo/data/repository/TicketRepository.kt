@@ -18,6 +18,26 @@ class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
         return ticketDao.get(id)
     }
 
+    override fun getAllActiveFlow(): Flow<List<Ticket>> {
+        return ticketDao.getAllActiveFlow()
+    }
+
+    override suspend fun getAllActive(): List<Ticket> {
+        return ticketDao.getAllActive()
+    }
+
+    override fun getActiveFlow(id: Int): Flow<Ticket> {
+        return ticketDao.getActiveFlow(id)
+    }
+
+    override suspend fun getActive(id: Int): Ticket {
+        return ticketDao.getActive(id)
+    }
+
+    override suspend fun cancel(id: Int) {
+        ticketDao.cancel(id)
+    }
+
     override fun getFlow(id: Int): Flow<Ticket> {
         return ticketDao.getFlow(id)
     }

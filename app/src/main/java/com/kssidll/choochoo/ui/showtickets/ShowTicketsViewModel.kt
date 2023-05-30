@@ -22,7 +22,7 @@ class ShowTicketsViewModel @Inject constructor(ticketsRepository: ITicketReposit
     }
 
     fun getTickets(): Flow<List<TicketData>> {
-        return ticketsRepository.getAllFlow().map {
+        return ticketsRepository.getAllActiveFlow().map {
             it.map { ticket ->
                 val connection = connectionRepository.get(ticket.connectionId)
                 TicketData(
