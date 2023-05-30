@@ -24,7 +24,7 @@ class ShowTicketDetailsViewModel @Inject constructor(connectionRepository: IConn
     }
 
     suspend fun fetchData(id: Int) {
-        val ticket = ticketRepository.get(id)
+        val ticket = ticketRepository.getActive(id)
         val connection = connectionRepository.get(ticket.connectionId)
 
         ticketData = TicketData(
@@ -39,7 +39,7 @@ class ShowTicketDetailsViewModel @Inject constructor(connectionRepository: IConn
     }
 
     fun cancelTicket(id: Int) = viewModelScope.launch {
-
+        ticketRepository.cancel(id)
     }
 
 
