@@ -67,10 +67,10 @@ fun ShowTicketsScreenContent(
     }
 }
 
-@Preview(group = "SearchConnectionScreen", name = "Search Connection Light", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-@Preview(group = "SearchConnectionScreen", name = "Search Connection Dark", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Preview(group = "ShowTicketsScreen", name = "Show Tickets Screen Light", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@Preview(group = "ShowTicketsScreen", name = "Show Tickets Screen Dark", apiLevel = 29,showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun SearchConnectionScreenPreview() {
+fun ShowTicketsScreenPreview() {
     ChooChooTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),

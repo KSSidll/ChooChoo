@@ -47,8 +47,8 @@ fun TicketItem(ticket: TicketData) {
     }
 }
 
-@Preview(group = "SearchConnectionScreen", name = "Search Connection Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(group = "SearchConnectionScreen", name = "Search Connection Dark", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(group = "TicketItem", name = "Ticket Item Light", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(group = "TicketItem", name = "Ticket Item Dark", apiLevel = 29, showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun TicketItemPreview() {
     ChooChooTheme {
