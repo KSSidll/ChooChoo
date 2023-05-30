@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 fun ShowConnectionsRoute(
     origin: String,
     destination: String,
-    onConnectionSelect: (ConnectionData) -> Unit,
+    onConnectionSelect: (ConnectionData, Long) -> Unit,
     onBack: () -> Unit
 ) {
     val showConnectionsViewModel: ShowConnectionsViewModel = hiltViewModel()

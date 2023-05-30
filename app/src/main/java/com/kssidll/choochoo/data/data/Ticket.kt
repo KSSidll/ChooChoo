@@ -12,7 +12,8 @@ import androidx.room.PrimaryKey
 data class Ticket(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(index = true) val connectionId: Int,
+    val date: Long,
     var active: Boolean
 ) {
-    constructor(connectionId: Int) : this(0, connectionId, true)
+    constructor(connectionId: Int, date: Long) : this(0, connectionId, date, true)
 }

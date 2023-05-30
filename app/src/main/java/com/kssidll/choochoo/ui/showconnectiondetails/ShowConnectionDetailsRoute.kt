@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ShowConnectionDetailsRoute(
     connectionId: Int,
+    date: Long,
     onBack: () -> Unit,
     onTicketBuy: () -> Unit,
 ) {
@@ -36,8 +37,12 @@ fun ShowConnectionDetailsRoute(
     } else {
         ShowConnectionDetailsScreen(
             connection = showConnectionDetailsViewModel.connectionData,
-            onBack = onBack,
-            onTicketBuy = onTicketBuy
+            date = date,
+            onTicketBuy = {
+                showConnectionDetailsViewModel.addTicket(it)
+                onTicketBuy()
+            },
+            onBack = onBack
         )
     }
 }

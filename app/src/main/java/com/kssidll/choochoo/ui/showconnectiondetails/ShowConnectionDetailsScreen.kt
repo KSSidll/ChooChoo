@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kssidll.choochoo.data.data.Ticket
 import com.kssidll.choochoo.ui.shared.SecondaryAppBar
 import com.kssidll.choochoo.ui.theme.ChooChooTheme
 import java.sql.Time
@@ -35,8 +36,9 @@ import java.util.Locale
 @Composable
 fun ShowConnectionDetailsScreen(
     connection: ConnectionData,
-    onBack: () -> Unit,
-    onTicketBuy: () -> Unit
+    date: Long,
+    onTicketBuy: (Ticket) -> Unit,
+    onBack: () -> Unit
 ) {
     Column {
         SecondaryAppBar(onBack = onBack) {}
@@ -44,6 +46,7 @@ fun ShowConnectionDetailsScreen(
         Box(modifier = Modifier.padding(horizontal = 12.dp)) {
             ShowConnectionDetailsScreenContent(
                 connection = connection,
+                date = date,
                 onTicketBuy = onTicketBuy
             )
         }
@@ -53,7 +56,8 @@ fun ShowConnectionDetailsScreen(
 @Composable
 fun ShowConnectionDetailsScreenContent(
     connection: ConnectionData,
-    onTicketBuy: () -> Unit
+    date: Long,
+    onTicketBuy: (Ticket) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -124,7 +128,7 @@ fun ShowConnectionDetailsScreenContent(
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = onTicketBuy,
+                    onClick = { onTicketBuy(Ticket(connection.connectionId, date)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
@@ -162,8 +166,9 @@ fun ShowConnectionDetailsScreenPreview() {
         ) {
             ShowConnectionDetailsScreen(
                 connection = ConnectionData(0,"Origin","Destination",0,0,0),
-                onBack = {},
-                onTicketBuy = {}
+                date = 0,
+                onTicketBuy = {},
+                onBack = {}
             )
         }
     }

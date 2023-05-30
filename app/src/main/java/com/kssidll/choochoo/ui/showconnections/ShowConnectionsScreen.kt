@@ -34,7 +34,7 @@ fun ShowConnectionsScreen(
     origin: String,
     destination: String,
     connectionsData: List<ConnectionData>,
-    onConnectionSelect: (ConnectionData) -> Unit,
+    onConnectionSelect: (ConnectionData, Long) -> Unit,
     onBack: () -> Unit
 ) {
     Column {
@@ -62,10 +62,14 @@ fun ShowConnectionsScreen(
 @Composable
 fun ShowConnectionsScreenContent(
     connectionsData: List<ConnectionData>,
-    onConnectionSelect: (ConnectionData) -> Unit
+    onConnectionSelect: (ConnectionData, Long) -> Unit
 ) {
     LazyColumn {
         for (i in 0..30) {
+            val currentTime = Calendar.getInstance().time
+            val time = currentTime.time.plus(i*1000*60*60*24)
+            val formatter = SimpleDateFormat("dd MMM", Locale.ENGLISH)
+
             this.item {
                 Box(
                     modifier = Modifier
@@ -78,9 +82,7 @@ fun ShowConnectionsScreenContent(
                         verticalAlignment = CenterVertically,
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        val currentTime = Calendar.getInstance().time
-                        val time = currentTime.time.plus(i*1000*60*60*24)
-                        val formatter = SimpleDateFormat("dd MMM", Locale.ENGLISH)
+
                         Text(text = formatter.format(time).toString())
                     }
                 }
@@ -88,7 +90,7 @@ fun ShowConnectionsScreenContent(
             for (connection in connectionsData) {
                 this.item {
                     Column {
-                        Box(modifier = Modifier.clickable { onConnectionSelect(connection) }) {
+                        Box(modifier = Modifier.clickable { onConnectionSelect(connection, time) }) {
                             ConnectionItem(
                                 connectionData = connection,
                                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
@@ -117,7 +119,7 @@ fun ShowConnectionsScreenPreview() {
                 origin = "Origin",
                 destination = "Destination",
                 connectionsData = generateConnections(3),
-                onConnectionSelect = {},
+                onConnectionSelect = { _, _ -> },
                 onBack = {}
             )
         }

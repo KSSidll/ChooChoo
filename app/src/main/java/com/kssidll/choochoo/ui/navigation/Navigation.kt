@@ -52,19 +52,21 @@ fun Navigation(
         }
 
         composable(
-            "$SHOW_CONNECTION_DETAILS_ROUTE/{connectionId}",
+            "$SHOW_CONNECTION_DETAILS_ROUTE/{connectionId}/{date}",
             arguments = listOf(
-                navArgument("connectionId") {type = NavType.IntType}
+                navArgument("connectionId") {type = NavType.IntType},
+                navArgument("date") {type = NavType.LongType}
             )
         ) {
             ShowConnectionDetailsRoute(
                 connectionId = it.arguments?.getInt("connectionId")!!,
-                onBack = {
-                    navController.popBackStack()
-                },
+                date = it.arguments?.getLong("date")!!,
                 onTicketBuy = {
                     navController.popBackStack(BASE_ROUTE, false)
                     navController.navigate(SHOW_TICKETS_ROUTE)
+                },
+                onBack = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -79,8 +81,8 @@ fun Navigation(
             ShowConnectionsRoute(
                 origin = it.arguments?.getString("origin")!!,
                 destination = it.arguments?.getString("destination")!!,
-                onConnectionSelect = { connectionData ->
-                    navController.navigate("$SHOW_CONNECTION_DETAILS_ROUTE/${connectionData.id}")
+                onConnectionSelect = { connectionData, date ->
+                    navController.navigate("$SHOW_CONNECTION_DETAILS_ROUTE/${connectionData.id}/${date}")
                 },
                 onBack = {
                     navController.popBackStack()
