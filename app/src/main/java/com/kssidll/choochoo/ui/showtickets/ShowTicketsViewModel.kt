@@ -7,6 +7,7 @@ import com.kssidll.choochoo.data.repository.ITicketRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +23,7 @@ class ShowTicketsViewModel @Inject constructor(ticketsRepository: ITicketReposit
     }
 
     fun getTickets(): Flow<List<TicketData>> {
-        return ticketsRepository.getAllActiveFlow().map {
+        return ticketsRepository.getAllActiveNewerThanFlow(Calendar.getInstance().time.time.minus(1000*60*60*24*3)).map {
             it.map { ticket ->
                 val connection = connectionRepository.get(ticket.connectionId)
                 TicketData(
