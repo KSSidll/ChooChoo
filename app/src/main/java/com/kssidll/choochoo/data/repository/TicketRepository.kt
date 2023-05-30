@@ -6,12 +6,20 @@ import kotlinx.coroutines.flow.Flow
 
 class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
 
-    override fun getAll(): Flow<List<Ticket>> {
+    override suspend fun getAll(): List<Ticket> {
         return ticketDao.getAll()
     }
 
-    override fun get(id: Int): Flow<Ticket> {
+    override fun getAllFlow(): Flow<List<Ticket>> {
+        return ticketDao.getAllFlow()
+    }
+
+    override suspend fun get(id: Int): Ticket {
         return ticketDao.get(id)
+    }
+
+    override fun getFlow(id: Int): Flow<Ticket> {
+        return ticketDao.getFlow(id)
     }
 
     override suspend fun insert(ticket: Ticket) {

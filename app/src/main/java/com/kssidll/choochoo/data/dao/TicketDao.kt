@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TicketDao {
     @Query("SELECT * FROM ticket ORDER BY id ASC")
-    fun getAll(): Flow<List<Ticket>>
+    fun getAllFlow(): Flow<List<Ticket>>
+
+    @Query("SELECT * FROM ticket ORDER BY id ASC")
+    suspend fun getAll(): List<Ticket>
 
     @Query("SELECT * FROM ticket WHERE id == :id")
-    fun get(id: Int): Flow<Ticket>
+    fun getFlow(id: Int): Flow<Ticket>
+
+    @Query("SELECT * FROM ticket WHERE id == :id")
+    suspend fun get(id: Int): Ticket
 
     @Insert
     suspend fun insert(ticket: Ticket)
