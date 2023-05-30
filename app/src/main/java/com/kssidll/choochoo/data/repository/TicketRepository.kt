@@ -34,6 +34,14 @@ class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
         return ticketDao.getActive(id)
     }
 
+    override fun getAllOlderThanFlow(date: Long): Flow<Ticket> {
+        return ticketDao.getAllOlderThanFlow(date)
+    }
+
+    override fun getAllNewerThanFlow(date: Long): Flow<Ticket> {
+        return ticketDao.getAllNewerThanFlow(date)
+    }
+
     override suspend fun cancel(id: Int) {
         ticketDao.cancel(id)
     }

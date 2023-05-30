@@ -34,6 +34,12 @@ interface TicketDao {
     @Query("SELECT * FROM ticket WHERE id == :id AND active = 1")
     suspend fun getActive(id: Int): Ticket
 
+    @Query("Select * FROM ticket WHERE date < :date")
+    fun getAllOlderThanFlow(date: Long): Flow<Ticket>
+
+    @Query("Select * FROM ticket WHERE date > :date")
+    fun getAllNewerThanFlow(date: Long): Flow<Ticket>
+
     @Query("UPDATE ticket SET active = 0 WHERE id = :id")
     suspend fun cancel(id: Int)
 
