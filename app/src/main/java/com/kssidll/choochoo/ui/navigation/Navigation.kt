@@ -13,10 +13,12 @@ import com.kssidll.choochoo.ui.navigation.Destinations.SEARCH_CONNECTION_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTIONS_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTION_DETAILS_ROUTE
 import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_TICKETS_ROUTE
+import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_TICKET_DETAILS_ROUTE
 import com.kssidll.choochoo.ui.searchconnection.SearchConnectionRoute
 import com.kssidll.choochoo.ui.shared.AppScaffold
 import com.kssidll.choochoo.ui.showconnectiondetails.ShowConnectionDetailsRoute
 import com.kssidll.choochoo.ui.showconnections.ShowConnectionsRoute
+import com.kssidll.choochoo.ui.showticketdetails.ShowTicketDetailsRoute
 import com.kssidll.choochoo.ui.showtickets.ShowTicketsRoute
 
 object Destinations {
@@ -24,6 +26,7 @@ object Destinations {
     const val SHOW_CONNECTIONS_ROUTE = "showconnections"
     const val SHOW_CONNECTION_DETAILS_ROUTE = "showconnectiondetails"
     const val SHOW_TICKETS_ROUTE = "showtickets"
+    const val SHOW_TICKET_DETAILS_ROUTE = "showticketdetails"
 
     const val BASE_ROUTE = SEARCH_CONNECTION_ROUTE
     const val INITIAL_ROUTE = SEARCH_CONNECTION_ROUTE
@@ -95,8 +98,29 @@ fun Navigation(
                 navHostController = navController,
                 selectedNavButton = SHOW_TICKETS_ROUTE
             ) {
-                ShowTicketsRoute()
+                ShowTicketsRoute(
+                    onTicketClick = {
+                        navController.navigate("$SHOW_TICKET_DETAILS_ROUTE/${it}")
+                    }
+                )
             }
+        }
+
+        composable(
+            "$SHOW_TICKET_DETAILS_ROUTE/{ticketId}",
+            arguments = listOf(
+                navArgument("ticketId") {type = NavType.IntType},
+            )
+        ) {
+            ShowTicketDetailsRoute(
+                ticketId = it.arguments?.getInt("ticketId")!!,
+                onTicketCancel = {
+                    navController.popBackStack()
+                },
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
 
     }

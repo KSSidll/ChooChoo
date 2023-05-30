@@ -3,6 +3,7 @@ package com.kssidll.choochoo.ui.showtickets
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,14 +27,19 @@ import java.util.Locale
 
 @Composable
 fun ShowTicketsScreen(
-    tickets: List<TicketData>
+    tickets: List<TicketData>,
+    onTicketClick: (TicketData) -> Unit
 ) {
-    ShowTicketsScreenContent(tickets = tickets)
+    ShowTicketsScreenContent(
+        tickets = tickets,
+        onTicketClick = onTicketClick
+    )
 }
 
 @Composable
 fun ShowTicketsScreenContent(
-    tickets: List<TicketData>
+    tickets: List<TicketData>,
+    onTicketClick: (TicketData) -> Unit
 ) {
     val groups = tickets.groupBy { it.date }.toSortedMap()
     val dateFormatter = SimpleDateFormat("d MMM, E", Locale.ENGLISH)
@@ -54,8 +60,16 @@ fun ShowTicketsScreenContent(
             }
             Column {
                 for ((index, ticket) in group.value.withIndex()) {
-                    Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                        TicketItem(ticket = ticket)
+                    Box(modifier = Modifier.clickable {
+                        onTicketClick(ticket)
+                    }) {
+                        Box(
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp, vertical = 8.dp)
+                                .clickable { onTicketClick(ticket) }
+                        ) {
+                            TicketItem(ticket = ticket)
+                        }
                     }
                     if (index < group.value.lastIndex) {
                         Divider(color = MaterialTheme.colorScheme.primary)
@@ -81,7 +95,8 @@ fun ShowTicketsScreenPreview() {
                     TicketData(0, "Origin", "Destination", 0, Calendar.getInstance().time.time),
                     TicketData(0, "Origin", "Destination", 0, Calendar.getInstance().time.time.plus(2*1000*60*60*24)),
                     TicketData(0, "Origin", "Destination", 0, Calendar.getInstance().time.time.plus(6*1000*60*60*24))
-                )
+                ),
+                onTicketClick = {}
             )
         }
     }
