@@ -26,6 +26,7 @@ import com.kssidll.choochoo.ui.theme.ChooChooTheme
 fun OutlinedTextFieldWithExposedDropdown(
         placeholder: String,
         value: String,
+        isError: Boolean,
         onValueChange: (String) -> Unit,
         possibleValues: List<String>,
         modifier: Modifier = Modifier,
@@ -53,7 +54,8 @@ fun OutlinedTextFieldWithExposedDropdown(
                 }
             ),
             placeholder = { Text(text = placeholder, modifier = Modifier.alpha(0.5F)) },
-            singleLine = singleLine
+            singleLine = singleLine,
+            isError = isError
         )
         ExposedDropdownMenu(
             expanded = expanded,
@@ -91,6 +93,7 @@ fun OutlinedTextFieldWithExposedDropdownPreview() {
                 onValueChange = {},
                 possibleValues = listOf(),
                 modifier = Modifier.background(MaterialTheme.colorScheme.primary),
+                isError = false
             )
         }
     }

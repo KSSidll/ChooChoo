@@ -22,6 +22,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
@@ -52,6 +53,14 @@ fun SearchConnectionScreenContent(
         mutableStateOf(SearchConnectionState())
     }
 
+    val originError = remember {
+        mutableStateOf(false)
+    }
+
+    val destinationError = remember {
+        mutableStateOf(false)
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -68,7 +77,8 @@ fun SearchConnectionScreenContent(
                     value = searchConnectionState.origin,
                     onValueChange = {searchConnectionState.origin = it},
                     possibleValues = stations,
-                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary),
+                    isError = originError.value
                 )
             }
 
@@ -83,7 +93,8 @@ fun SearchConnectionScreenContent(
                     value = searchConnectionState.destination,
                     onValueChange = {searchConnectionState.destination = it},
                     possibleValues = stations,
-                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary),
+                    isError = destinationError.value
                 )
             }
         }
@@ -102,7 +113,13 @@ fun SearchConnectionScreenContent(
 
                 Button(
                     onClick = {
-                        /*TODO assert both fields are filled and correct, change border to error when not*/
+                        val containsOrigin = stations.contains(searchConnectionState.origin)
+                        val containsDestination = stations.contains(searchConnectionState.destination)
+
+                        originError.value = !containsOrigin
+                        destinationError.value = !containsDestination
+
+                        if (containsOrigin && containsDestination)
                         onSearchConnection(searchConnectionState)
                     },
                     modifier = Modifier
