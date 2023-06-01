@@ -49,7 +49,7 @@ interface TicketDao {
     suspend fun cancel(id: Int)
 
     @Insert
-    suspend fun insert(ticket: Ticket)
+    suspend fun insert(ticket: Ticket): Long
 
     @Update
     suspend fun update(ticket: Ticket)

@@ -58,8 +58,8 @@ class TicketRepository(private val ticketDao: TicketDao) : ITicketRepository {
         return ticketDao.getFlow(id)
     }
 
-    override suspend fun insert(ticket: Ticket) {
-        ticketDao.insert(ticket)
+    override suspend fun insert(ticket: Ticket): Long {
+        return ticketDao.insert(ticket)
     }
 
     override suspend fun update(ticket: Ticket) {

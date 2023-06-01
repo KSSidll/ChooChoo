@@ -17,7 +17,7 @@ interface ITicketRepository {
     fun getAllActiveOlderThanFlow(date: Long):Flow<List<Ticket>>
     fun getAllActiveNewerThanFlow(date: Long): Flow<List<Ticket>>
     suspend fun cancel(id: Int)
-    suspend fun insert(ticket: Ticket)
+    suspend fun insert(ticket: Ticket): Long
     suspend fun update(ticket: Ticket)
     suspend fun delete(ticket: Ticket)
 }
