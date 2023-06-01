@@ -47,7 +47,6 @@ fun MainAppBar(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            /* TODO create app logo and call it here*/
             Text(
                 text = "ChooChoo",
                 color = MaterialTheme.colorScheme.onPrimary)
