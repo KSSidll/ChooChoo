@@ -7,7 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kssidll.choochoo.notification.sendTicketCancelledNotification
 import com.kssidll.choochoo.ui.shared.Loading
 import kotlinx.coroutines.launch
 
@@ -18,6 +20,7 @@ fun ShowTicketDetailsRoute(
     onTicketCancel: () -> Unit,
 ) {
     val showTicketDetailsViewModel: ShowTicketDetailsViewModel= hiltViewModel()
+    val context = LocalContext.current
 
     val scope = rememberCoroutineScope()
     var loading: Boolean by remember {
@@ -38,6 +41,14 @@ fun ShowTicketDetailsRoute(
             ticket = showTicketDetailsViewModel.ticketData,
             onTicketCancel = {
                 showTicketDetailsViewModel.cancelTicket(it.ticketId)
+
+                sendTicketCancelledNotification(
+                    context = context,
+                    origin = it.origin,
+                    destination = it.destination,
+                    price = it.price
+                )
+
                 onTicketCancel()
             },
             onBack = onBack

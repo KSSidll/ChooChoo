@@ -1,25 +1,31 @@
-package com.kssidll.choochoo.ui.navigation
+package com.kssidll.choochoo
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.kssidll.choochoo.ui.navigation.Destinations.BASE_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.INITIAL_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.SEARCH_CONNECTION_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTIONS_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_CONNECTION_DETAILS_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_TICKETS_ROUTE
-import com.kssidll.choochoo.ui.navigation.Destinations.SHOW_TICKET_DETAILS_ROUTE
+import androidx.compose.runtime.getValue
+import com.kssidll.choochoo.Destinations.BASE_ROUTE
+import com.kssidll.choochoo.Destinations.INITIAL_ROUTE
+import com.kssidll.choochoo.Destinations.SEARCH_CONNECTION_ROUTE
+import com.kssidll.choochoo.Destinations.SHOW_CONNECTIONS_ROUTE
+import com.kssidll.choochoo.Destinations.SHOW_CONNECTION_DETAILS_ROUTE
+import com.kssidll.choochoo.Destinations.SHOW_TICKETS_ROUTE
+import com.kssidll.choochoo.Destinations.SHOW_TICKET_DETAILS_ROUTE
+import com.kssidll.choochoo.NavigationActions.ACTION_SHOW_TICKET_DETAILS
+import com.kssidll.choochoo.notification.Extras.TICKET_ID
 import com.kssidll.choochoo.ui.searchconnection.SearchConnectionRoute
 import com.kssidll.choochoo.ui.shared.AppScaffold
 import com.kssidll.choochoo.ui.showconnectiondetails.ShowConnectionDetailsRoute
 import com.kssidll.choochoo.ui.showconnections.ShowConnectionsRoute
 import com.kssidll.choochoo.ui.showticketdetails.ShowTicketDetailsRoute
 import com.kssidll.choochoo.ui.showtickets.ShowTicketsRoute
+
 
 object Destinations {
     const val SEARCH_CONNECTION_ROUTE = "searchconnection"
@@ -32,10 +38,26 @@ object Destinations {
     const val INITIAL_ROUTE = SEARCH_CONNECTION_ROUTE
 }
 
+object NavigationActions {
+    const val ACTION_SHOW_TICKET_DETAILS = "navigation.actions.showticketdetails"
+}
+
 @Composable
 fun Navigation(
         navController: NavHostController = rememberNavController()
 ) {
+    val navigationViewModel: NavigationViewModel = hiltViewModel()
+    val action: String? by navigationViewModel.action.collectAsState()
+
+    when (action) {
+        ACTION_SHOW_TICKET_DETAILS -> {
+            val id = navigationViewModel.extras?.getInt(TICKET_ID)
+            if (navController.currentBackStackEntry?.destination?.route != "${SHOW_TICKET_DETAILS_ROUTE}/$id") {
+                navController.popBackStack(BASE_ROUTE, false)
+                navController.navigate("${SHOW_TICKET_DETAILS_ROUTE}/$id")
+            }
+        }
+    }
 
     NavHost(
         navController = navController,

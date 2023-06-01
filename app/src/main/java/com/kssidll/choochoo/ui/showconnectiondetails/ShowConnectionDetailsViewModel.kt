@@ -1,13 +1,11 @@
 package com.kssidll.choochoo.ui.showconnectiondetails
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.kssidll.choochoo.data.data.Ticket
 import com.kssidll.choochoo.data.repository.IConnectionRepository
 import com.kssidll.choochoo.data.repository.ITicketRepository
 import com.kssidll.choochoo.data.repository.IStationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,7 +35,7 @@ class ShowConnectionDetailsViewModel @Inject constructor(connectionRepository: I
         )
     }
 
-    fun addTicket(ticket: Ticket) = viewModelScope.launch {
-        ticketRepository.insert(ticket)
+    suspend fun addTicket(ticket: Ticket): Long {
+        return ticketRepository.insert(ticket)
     }
 }

@@ -24,7 +24,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.kssidll.choochoo.ui.navigation.Destinations
+import com.kssidll.choochoo.Destinations
 import kotlinx.coroutines.launch
 
 @Composable
