@@ -120,7 +120,7 @@ fun SearchConnectionScreenContent(
                         destinationError.value = !containsDestination
 
                         if (containsOrigin && containsDestination)
-                        onSearchConnection(searchConnectionState)
+                            onSearchConnection(searchConnectionState)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
